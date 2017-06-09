@@ -29,7 +29,7 @@ public class Person {
      * @return the name
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -43,7 +43,7 @@ public class Person {
      * @return the country
      */
     public String getCountry() {
-        return country;
+        return this.country;
     }
 
     /**
@@ -57,7 +57,7 @@ public class Person {
      * @return the birthDate
      */
     public LocalDate getBirthDate() {
-        return birthDate;
+        return this.birthDate;
     }
 
     /**
@@ -71,7 +71,7 @@ public class Person {
      * @return the id
      */
     public long getId() {
-        return id;
+        return this.id;
     }
     
     @Override
