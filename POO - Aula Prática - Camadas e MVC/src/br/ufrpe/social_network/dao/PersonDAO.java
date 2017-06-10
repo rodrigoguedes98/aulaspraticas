@@ -40,6 +40,19 @@ public class PersonDAO {
     	}
     }
     
+    public long recover(Person p)
+    {
+    	for (int i = 0; i < persons.length; i++) {
+			if(p.getId()==persons[i].getId())
+			{
+				return i;
+			}
+		}
+    	return -1;
+    }
+    
+    
+    
     
     //TODO Implementar CRUD para classe básica Person usando array
     
