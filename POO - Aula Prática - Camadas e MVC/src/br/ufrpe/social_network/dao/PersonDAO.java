@@ -35,21 +35,55 @@ public class PersonDAO {
     {
     	this.persons[next++] = p;
     	
-    	if(next == persons.length){
+    	if(next == this.persons.length){
     		this.duplicateRepository();
     	}
     }
     
-    public long recover(Person p)
+    public int findIndex(Person p)//find the index of the object on the array
     {
-    	for (int i = 0; i < persons.length; i++) {
-			if(p.getId()==persons[i].getId())
-			{
-				return i;
-			}
-		}
-    	return -1;
+    	int i = 0;
+    	boolean find = false;
+    			while(!find && i<this.next)
+    			{
+    				if(i == this.next){
+    					return -1;
+    					
+    				}else if(p.getId() == this.persons[i].getId()){
+    					find = true;
+    				}else{
+    					i++;
+    				}
+    			}
+    			return i;
     }
+    
+   
+    
+    public Person recover(Person p)//return the object of the array
+    {	
+    		Person j = null;
+    		if(findIndex(p) == -1){
+    			return null;
+    		}else{
+    			
+    		j = this.persons[findIndex(p)];
+    		
+    		}
+    		   		
+    		return j;
+    	    }
+    
+    
+    	public void remove(Person p)//remove the object from the array
+    	{
+    			if(findIndex(p) != -1){
+    				this.persons[findIndex(p)] = this.persons[this.next-1];
+    				this.persons[this.next-1] = null;
+    				this.next--;
+    				System.out.println("Usuário removido!");
+    			}
+    	}
     
     
     
