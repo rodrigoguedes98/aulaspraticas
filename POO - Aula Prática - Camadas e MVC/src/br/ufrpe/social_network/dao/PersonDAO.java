@@ -81,7 +81,7 @@ public class PersonDAO {
     				this.persons[findIndex(p)] = this.persons[this.next-1];
     				this.persons[this.next-1] = null;
     				this.next--;
-    				System.out.println("Usuário removido!");
+    				System.out.println("Usuário removido!!");
     			}
     	}
     
