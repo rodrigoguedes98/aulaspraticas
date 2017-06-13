@@ -37,7 +37,7 @@ public class Post {
     
     @Override
     public String toString() {
-        // TODO Implementar método toString da classe Person
+        // TODO Implementar método toString da classe Post
         return "Coloque sua implementação aqui";
     }
 }

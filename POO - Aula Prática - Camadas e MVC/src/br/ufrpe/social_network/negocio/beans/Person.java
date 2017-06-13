@@ -1,6 +1,7 @@
 package br.ufrpe.social_network.negocio.beans;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Person {
 
@@ -10,6 +11,7 @@ public class Person {
     private String name;
     private String country;
     private LocalDate birthDate;
+    private int idade;
     
     public Person(String name, String country, LocalDate birthDate) {
         // auto-generated ID
@@ -19,6 +21,7 @@ public class Person {
         this.name = name;
         this.country = country;
         this.birthDate = birthDate;
+        this.idade = Period.between(this.birthDate, LocalDate.now()).getYears();
     }
     
     public Person() {
@@ -74,9 +77,18 @@ public class Person {
         return this.id;
     }
     
+    public int getIdade(){
+    	return this.idade;
+    }
+    
     @Override
     public String toString() {
-        // TODO Implementar método toString da classe Person
-        return "Coloque sua implementação aqui";
+    	String resultado = "";
+    	resultado += "Nome: " + this.getName();
+    	resultado += "\nIdade: " + this.getIdade() + "anos";
+    	resultado += "\nPaís: " + this.getCountry();
+    	resultado += "\nID: " + this.getId();
+    	
+        return resultado;
     }
 }
