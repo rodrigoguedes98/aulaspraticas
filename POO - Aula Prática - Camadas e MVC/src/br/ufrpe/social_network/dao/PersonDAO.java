@@ -37,12 +37,45 @@ public class PersonDAO {
     	persons = newRepository;
     }
     
-    public void insert(Person p) //insert a new person on repository
+    public void insert() //insert a new person on repository
     {
+    	
+    	System.out.println("\nNome: ");
+		String name = (tec.nextLine());
+		tec.nextLine();
+		int dia, mes, ano;
+		System.out.println("\nData de nascimento: ");
+		
+		
+			System.out.println("ano: ");
+			ano = tec.nextInt();
+			
+			System.out.println("mês");
+			mes = tec.nextInt();
+			
+			System.out.println("dia");
+			dia = tec.nextInt();
+		LocalDate data = LocalDate.of(ano, mes, dia);
+		System.out.println("\nPaís: ");
+		String country = (tec.nextLine());
+    	
+		Person p = new Person(name, country, data);
+		
+    	
     	this.persons[next++] = p;
     	
     	if(next == this.persons.length){
     		this.duplicateRepository();
+    	}
+    }
+    
+    public void insert(Person p)
+    {
+    	if(p != null){
+    	this.persons[next++] = p;
+    	if(next == this.persons.length){
+    		this.duplicateRepository();
+    		}
     	}
     }
     
