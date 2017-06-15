@@ -1,12 +1,12 @@
 package br.ufrpe.social_network.dao;
-import java.time.LocalDate;
-import java.util.Scanner;
+
+
 
 import br.ufrpe.social_network.negocio.beans.*;
 
 public class PersonDAO {
     
-	Scanner tec = new Scanner(System.in);
+	;
 	
 	
     private Person[] persons;
@@ -20,6 +20,7 @@ public class PersonDAO {
     	this.next = 0;
     }
     
+    //Singleton
     public static PersonDAO getInstance()
    	{
     	if(instance == null)
@@ -28,7 +29,7 @@ public class PersonDAO {
     	return instance;
  	}
     
-    private void duplicateRepository()//duplicate the repository if this is full
+    private void duplicateRepository()//duplica o repositorio se ele estiver cheio
     {
     	Person[] newRepository = new Person[persons.length*2];
     	for (int i = 0; i < this.persons.length; i++) {
@@ -37,69 +38,43 @@ public class PersonDAO {
     	persons = newRepository;
     }
     
-    public void insert() //insert a new person on repository
+    public boolean insert(Person p) //insere o objeto no repositorio e se necessario duplica o mesmo
     {
     	
-    	System.out.println("\nNome: ");
-		String name = (tec.nextLine());
-		tec.nextLine();
-		int dia, mes, ano;
-		System.out.println("\nData de nascimento: ");
-		
-		
-			System.out.println("ano: ");
-			ano = tec.nextInt();
-			
-			System.out.println("mês");
-			mes = tec.nextInt();
-			
-			System.out.println("dia");
-			dia = tec.nextInt();
-		LocalDate data = LocalDate.of(ano, mes, dia);
-		System.out.println("\nPaís: ");
-		String country = (tec.nextLine());
-    	
-		Person p = new Person(name, country, data);
-		
-    	
-    	this.persons[next++] = p;
-    	
-    	if(next == this.persons.length){
-    		this.duplicateRepository();
-    	}
-    }
-    
-    public void insert(Person p)
-    {
     	if(p != null){
-    	this.persons[next++] = p;
-    	if(next == this.persons.length){
-    		this.duplicateRepository();
+    		this.persons[this.next++] = p;
+    			if(next == this.persons.length){
+    					this.duplicateRepository();
+    	return true;
     		}
     	}
+    	return false;
     }
     
-    private int findIndex(int id)//find the index of the object on the array
+  
+    
+    private int findIndex(long id)//procura o indice do objeto no repositorio
     {
     	int i = 0;
     	boolean find = false;
     			while(!find && i<this.next)
     			{
-    				if(i == this.next){
-    					return -1;
-    					
-    				}else if(id == this.persons[i].getId()){
+    				 if(id == this.persons[i].getId()){
     					find = true;
     				}else{
     					i++;
     				}
     			}
+    			if(!find){
+					return -1;
+					
+				}
     			return i;
     }
     
    
     
-    public Person recover(int id)//return the object of the array
+    public Person recover(long id)//retorna o objeto do repositorio
     {	
     		Person j = null;
     		if(this.findIndex(id) == -1){
@@ -114,43 +89,34 @@ public class PersonDAO {
     	    }
     
     
-    	public void remove(int id)//remove the object from the array
+    	public boolean remove(Person p)//remove o objeto do repositorio
     	{
-    			if(this.findIndex(id) != -1){
-    				this.persons[this.findIndex(id)] = this.persons[this.next-1];
+    			if(this.findIndex(p.getId()) != -1){
+    				this.persons[this.findIndex(p.getId())] = this.persons[this.next-1];
     				this.persons[this.next-1] = null;
     				this.next--;
-    				System.out.println("Usuário removido!");
-    			}else{
-    				System.out.println("Usuário inexistente!");
+    				return true;
     			}
+    			return false;
     	}
     
     	
     	
-    	public void upDate(int id)// changes some informations about a user picking your Id.
+    	public boolean upDate(Person newPerson)//muda algumas informações no objeto do repositorio
     	{
-    		Person p = recover(id);
-    		System.out.println("\nNome: ");
-    		p.setName(tec.nextLine());
-    		tec.nextLine();
-    		int dia, mes, ano;
-    		System.out.println("\nData de nascimento: ");
-    		
-    		
-    			System.out.println("ano: ");
-    			ano = tec.nextInt();
-    			
-    			System.out.println("mês");
-    			mes = tec.nextInt();
-    			
-    			System.out.println("dia");
-    			dia = tec.nextInt();
-    		LocalDate data = LocalDate.of(ano, mes, dia);
-    		p.setBirthDate(data);
-    		System.out.println("\nPaís: ");
-    		p.setCountry(tec.nextLine());
+    				if(this.recover(newPerson.getId()) != null)
+    				{
+    					Person p = this.recover(newPerson.getId());
+    					p.setBirthDate(newPerson.getBirthDate());
+    					p.setCountry(newPerson.getCountry());
+    					p.setName(newPerson.getName());
+    					return true;
+    				}
+    				return false;
     	}
+    	
+    	
+	}	
     
     
-}
+

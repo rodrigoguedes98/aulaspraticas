@@ -12,7 +12,6 @@ public class Post {
     private ArrayList<Post> comments;
 
     public Post(String texto, Person author) {
-        
         this.texto = texto;
         this.author = author;
         this.comments = new ArrayList<>();
@@ -23,22 +22,21 @@ public class Post {
         this(null, null);
     }
 
-    
+   
     
     public void addComment(Post comment) {
         if (comment != null) {
             this.comments.add(comment);
         }
     }
+   
+    	
     
     public long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
+	
 	public String getTexto() {
 		return texto;
 	}
@@ -47,9 +45,7 @@ public class Post {
 		return author;
 	}
 
-	public ArrayList<Post> getComments() {
-		return comments;
-	}
+	
 
 	public void setTexto(String texto) {
 		this.texto = texto;
@@ -59,20 +55,50 @@ public class Post {
 		this.author = author;
 	}
 
-	public void setComments(ArrayList<Post> comments) {
-		this.comments = comments;
+	
+	private int findLastIndex()
+	{
+		boolean find = false;
+		int i = 0;
+		while(!find)
+		{
+			i++;
+			if(this.comments.get(i) == null){
+				find = true;
+				
+			}
+		}
+		return i-1;
 	}
+	
 
 	public void removeComment(Long id) {
-        // TODO remover comentário da lista de comentários se ele existir. 
-        // Você deve varrer a lista inteira verificando se há algum 
-        // comentário com o ID informado como parâmetro e então removê-lo
-		
+       
+		for(int i = 0; i < this.comments.size(); i++)
+		{
+			Post p = this.comments.get(i);
+			if(p.getId() == id)
+			{
+				this.comments.remove(p);
+			}
+		}
     }
     
     @Override
     public String toString() {
-        // TODO Implementar método toString da classe Post
-        return "Coloque sua implementação aqui";
+        String resultado = "";
+        resultado += author.getName() + "\n";
+        resultado += this.getTexto() + "\n";
+        resultado += "\t";
+        if(this.findLastIndex() != -1)
+        {
+        	for(int i = 0; i <= this.findLastIndex();i++)
+        	{
+        		
+        		Post p = this.comments.get(i);
+        		resultado += p.toString();
+        	}
+        }
+        return resultado;
     }
 }

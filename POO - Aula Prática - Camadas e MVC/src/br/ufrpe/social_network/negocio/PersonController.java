@@ -9,7 +9,7 @@ public class PersonController {
     private static PersonController instance;
     
     private PersonController() {
-        // Construtor privado para implementação de singleton
+        personsRepository = PersonDAO.getInstance();
     }
 
     public static PersonController getInstance() {
@@ -19,20 +19,32 @@ public class PersonController {
         return instance;
     }
     
+        
     public void savePerson(Person p) {
-        // TODO Método que salva pessoa no repositório
+    	if(personsRepository.insert(p)){
+    		System.out.println("Usuário criado com sucesso!");
+    	}else{
+    		System.out.println("Usuário não pode ser criado!");
+    	}
     }
     
     public Person find(long personId) {
-        // TODO Retorna o objeto do tipo Person que contenha aquele ID
-        return null;
+    	 return personsRepository.recover(personId);
     }
     
     public void update(Person newPerson) {
-        //TODO Encontra no repositório obj que tenha id igual a newPerson.id e atualiza objeto 
+    	if(personsRepository.upDate(newPerson)){
+    		System.out.println("Usuário atualizado com sucesso!");
+    	}else{
+    		System.out.println("Usuário não existe!");
+    	}
     }
     
     public void delete(Person p) {
-        // TODO apaga do repositório objeto que contenha o id igual a p.id 
+    	if(personsRepository.remove(p)){
+    		System.out.println("Usuário deletado com sucesso!");
+    	}else{
+    		System.out.println("Usuário não existe!");
+    	}
     }
 }
