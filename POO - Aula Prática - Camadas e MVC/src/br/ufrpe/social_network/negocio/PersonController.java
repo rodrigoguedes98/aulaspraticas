@@ -11,7 +11,7 @@ public class PersonController {
     private PersonController() {
         personsRepository = PersonDAO.getInstance();
     }
-
+//Singleton
     public static PersonController getInstance() {
         if (instance == null) {
             instance = new PersonController();

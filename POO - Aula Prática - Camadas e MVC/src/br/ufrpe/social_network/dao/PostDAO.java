@@ -24,12 +24,14 @@ public class PostDAO {
 		return instance;
 	}
 
-		public void insert(Post p)
+		public boolean insert(Post p)
 		{
 			if(p != null)
 			{
 				posts.add(p);
+				return true;
 			}
+			return false;
 		}
 		
 		private int findIndex(long id)//find the index of the object on the array
@@ -51,36 +53,36 @@ public class PostDAO {
 	    			return i;
 	    }
 		
-		public Post recover(long id)
+		public Post recover(long postId)
 		{
 			Post p = null;
-			if(this.findIndex(id) != -1)
+			if(this.findIndex(postId) != -1)
 			{
-				p = this.posts.get(this.findIndex(id));
+				p = this.posts.get(this.findIndex(postId));
 			}
 			return p;
 		}
 	
-		public void remove(long id)
+		public boolean remove(Post p)
 		{
-			if(this.recover(id) != null)
+			if(p != null && this.recover(p.getId()) != null)
 			{
-				posts.remove(this.recover(id));
-				System.out.println("Post removido com sucesso!\n");
-			}else
-			{
-				System.out.println("Post não existe\n");
+				this.posts.remove(this.recover(p.getId()));
+				return true;
 			}
+			return false;
 		}
 		
-		public void upDate(long id, String texto)
+		public boolean upDate(Post newPost)
 		{
-			Post p = null;
-			if(this.recover(id) != null)
+			
+			if(this.recover(newPost.getId()) != null && newPost != null)
 			{
-				p = this.recover(id);
+				this.remove(this.recover(newPost.getId()));
+				this.insert(newPost);
+				return true;
 			}
-				p.setTexto(texto);
+			return false;
 		}
 	
 

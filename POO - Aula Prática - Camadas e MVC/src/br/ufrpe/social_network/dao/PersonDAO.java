@@ -6,7 +6,7 @@ import br.ufrpe.social_network.negocio.beans.*;
 
 public class PersonDAO {
     
-	;
+	
 	
 	
     private Person[] persons;
@@ -91,7 +91,7 @@ public class PersonDAO {
     
     	public boolean remove(Person p)//remove o objeto do repositorio
     	{
-    			if(this.findIndex(p.getId()) != -1){
+    			if(p != null && this.findIndex(p.getId()) != -1){
     				this.persons[this.findIndex(p.getId())] = this.persons[this.next-1];
     				this.persons[this.next-1] = null;
     				this.next--;
@@ -104,7 +104,7 @@ public class PersonDAO {
     	
     	public boolean upDate(Person newPerson)//muda algumas informações no objeto do repositorio
     	{
-    				if(this.recover(newPerson.getId()) != null)
+    				if(newPerson != null && this.recover(newPerson.getId()) != null)
     				{
     					Person p = this.recover(newPerson.getId());
     					p.setBirthDate(newPerson.getBirthDate());
