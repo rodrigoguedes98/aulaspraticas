@@ -85,9 +85,9 @@ public class Person {
     public String toString() {
     	String resultado = "";
     	resultado += "Nome: " + this.getName();
-    	resultado += "\nIdade: " + this.getIdade() + "anos";
+    	resultado += "\nIdade: " + this.getIdade() + " anos";
     	resultado += "\nPaís: " + this.getCountry();
-    	resultado += "\nID: " + this.getId();
+    	
     	
         return resultado;
     }

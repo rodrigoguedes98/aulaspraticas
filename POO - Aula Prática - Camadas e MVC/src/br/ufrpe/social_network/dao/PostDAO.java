@@ -10,7 +10,7 @@ public class PostDAO {
 	private static PostDAO instance = null;
 	
 	private PostDAO(){
-		this.posts = new ArrayList<>(); 
+		this.posts = new ArrayList<Post>(); 
 	
 	}
 	
@@ -85,6 +85,10 @@ public class PostDAO {
 			return false;
 		}
 	
-
+		public void imprimirPosts(){
+			for (int i = 0; i < this.posts.size(); i++) {
+				System.out.println(this.posts.get(i));
+			}
+		}
     
 }

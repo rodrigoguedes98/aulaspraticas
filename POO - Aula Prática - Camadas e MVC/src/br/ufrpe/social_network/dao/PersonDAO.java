@@ -43,10 +43,12 @@ public class PersonDAO {
     	
     	if(p != null){
     		this.persons[this.next++] = p;
+    		
     			if(next == this.persons.length){
     					this.duplicateRepository();
-    	return true;
+    	
     		}
+    			return true;
     	}
     	return false;
     }

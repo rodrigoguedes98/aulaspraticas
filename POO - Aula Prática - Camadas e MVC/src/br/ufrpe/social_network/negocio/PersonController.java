@@ -28,11 +28,11 @@ public class PersonController {
     	}
     }
     
-    public Person find(long personId) {
+    public Person findPerson(long personId) {
     	 return personsRepository.recover(personId);
     }
     
-    public void update(Person newPerson) {
+    public void upDatePerson(Person newPerson) {
     	if(personsRepository.upDate(newPerson)){
     		System.out.println("Usuário atualizado com sucesso!");
     	}else{
@@ -40,7 +40,7 @@ public class PersonController {
     	}
     }
     
-    public void delete(Person p) {
+    public void deletePerson(Person p) {
     	if(personsRepository.remove(p)){
     		System.out.println("Usuário deletado com sucesso!");
     	}else{

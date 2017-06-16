@@ -2,6 +2,8 @@ package br.ufrpe.social_network.negocio;
 
 
 
+import java.util.ArrayList;
+
 import br.ufrpe.social_network.dao.PostDAO;
 import br.ufrpe.social_network.negocio.beans.*;
 
@@ -32,12 +34,12 @@ public class PostController {
     	}
     }
     
-    public Post find(long postId)
+    public Post findPost(long postId)
     {
     	return this.postsRepository.recover(postId);
     }
     
-    public void delete(Post p)
+    public void deletePost(Post p)
     {
     	if(this.postsRepository.remove(p))
     	{
@@ -47,7 +49,7 @@ public class PostController {
     	}
     }
     
-    public void upDate(Post newPost)
+    public void upDatePost(Post newPost)
     {
     	if(this.postsRepository.upDate(newPost)){
     		System.out.println("Post atualizado com sucesso!");
@@ -55,10 +57,25 @@ public class PostController {
     		System.out.println("Erro ao remover o post");
     	}
     }
+    
+    public void imprimirPosts(){
+    	postsRepository.imprimirPosts();
+    }
+    
 
-    
-    
-    // TODO Implementar método que lista todos os posts de uma determinada pessoa
+//    public void imprimirPersonPost(Person p){
+//    	PostController postsC = PostController.getInstance(); 
+//    	
+//    	for (int i = 0; i < postsC..; i++) {
+//			
+//		}
+//    		posts.add(this.postsRepository.recover(p.getId()));
+//		
+//    			
+//    	System.out.println();
+//    }
+//    
+    //TODO Implementar método que lista todos os posts de uma determinada pessoa
     
     // TODO DESAFIO Implementar método que busque todos comentários que uma dada pessoa realizou em posts de terceiros
     // Para implementar este método, você deve fazer uma buscar em todos os 

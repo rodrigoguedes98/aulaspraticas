@@ -14,7 +14,7 @@ public class Post {
     public Post(String texto, Person author) {
         this.texto = texto;
         this.author = author;
-        this.comments = new ArrayList<>();
+        this.comments = new ArrayList<Post>();
         this.id = nextId++;
     }
     
@@ -56,22 +56,6 @@ public class Post {
 	}
 
 	
-	private int findLastIndex()
-	{
-		boolean find = false;
-		int i = 0;
-		while(!find)
-		{
-			i++;
-			if(this.comments.get(i) == null){
-				find = true;
-				
-			}
-		}
-		return i-1;
-	}
-	
-
 	public void removeComment(Long id) {
        
 		for(int i = 0; i < this.comments.size(); i++)
@@ -87,18 +71,19 @@ public class Post {
     @Override
     public String toString() {
         String resultado = "";
-        resultado += author.getName() + "\n";
+        resultado += author.getName() + ":\n";
+        resultado +="\n\t\t";
         resultado += this.getTexto() + "\n";
         resultado += "\t";
-        if(this.findLastIndex() != -1)
-        {
-        	for(int i = 0; i <= this.findLastIndex();i++)
+        
+        
+        	for(int i = 0; i < this.comments.size();i++)
         	{
         		
         		Post p = this.comments.get(i);
-        		resultado += p.toString();
+        		resultado += "\t" + p.toString();
         	}
-        }
+        
         return resultado;
     }
 }
